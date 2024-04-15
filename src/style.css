@@ -1,0 +1,26 @@
+*{
+    margin:0;
+}
+
+.wrapper{
+    display:flex;
+    flex-direction: row;
+    border: 1px solid black;
+}
+
+.navig{
+    background-color: aqua;
+    width: 35%;
+    height:100vh;
+}
+
+#newTask{
+        position: absolute;
+        top: 50%;
+        left: 50%;
+}
+
+ul{
+    list-style:none;
+    padding:10px;
+}
