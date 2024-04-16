@@ -1,22 +1,23 @@
 let projects=['house','work','health'];
-let ul = document.createElement("ul"); 
+let menuContainer = document.createElement("div"); 
 export function createProject(){
 
 
 
 for(let i=0; i<projects.length; i++){ 
-  let li = document.createElement("li"); 
-  li.textContent = projects[i];
-  ul.appendChild(li); 
+  let button = document.createElement("button"); 
+  button.textContent = projects[i];
+  button.classList.add('menueButtons');
+  menuContainer.appendChild(button); 
 }
 
-document.getElementById("projectArray").appendChild(ul); 
+document.getElementById("projectArray").appendChild(menuContainer); 
 
 }
 
 export function addProject(){
   projects.push(newProjectTitle.value);
-ul.innerHTML = '';
+  menuContainer.innerHTML = '';
 createProject();
  }
 
@@ -26,18 +27,3 @@ export const newProjectBtn = document.getElementById('newProjectBtn');
 
 
 
-
-
-/*
-function addProject(input.value){
-  projects.push(input);
-   console.log(projects)
- }
- 
-
-   
-   const newProjectButton =document.getElementById('newProjectBtn');
-   newProjectButton.addEventListener("click", () => {
-       addProject();
-     });
-     */
