@@ -1,8 +1,8 @@
 import './style.css';
 import { createProject, addProject, newProjectBtn } from './navigation';
-import {main} from './task';
+import {createTask, addTask, createTaskBtn, displayTheTask} from './task';
 
-
+createTaskBtn.addEventListener ('click', addTask )
 
 
 
