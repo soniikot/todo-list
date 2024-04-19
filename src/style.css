@@ -1,17 +1,27 @@
 *{
     margin:0;
+    font-family: 'Times New Roman', Times, serif;
+    
 }
 
+h1{
+    padding:15px;
+    background-color: rgb(214, 182, 243);
+}
 .wrapper{
     display:flex;
     flex-direction: row;
-    border: 1px solid black;
+   
 }
 
 .navig{
-    background-color: aqua;
+    background-color: rgb(193, 230, 230);
     width: 35%;
     height:100vh;
+    padding:10px;
+    button{font-size: 18px;
+        width:100px;
+    }
 }
 
 #newTask{
@@ -23,4 +33,20 @@
 ul{
     list-style:none;
     padding:10px;
+}
+.menuContainer{
+   margin-top:10px;
+   margin-bottom:10px;
+    display:flex;
+    font-size: 18px;
+   width:100px;
+
+   
+} 
+
+#newProjectTitle{
+    font-size: 18px;
+    width:150px;
+    margin-bottom: 10px;
+
 }

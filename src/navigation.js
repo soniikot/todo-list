@@ -7,7 +7,7 @@ export function createProject(){
 for(let i=0; i<projects.length; i++){ 
   let button = document.createElement("button"); 
   button.textContent = projects[i];
-  button.classList.add('menueButtons');
+  button.classList.add('menuContainer');
   menuContainer.appendChild(button); 
 }
 
