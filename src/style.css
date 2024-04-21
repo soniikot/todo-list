@@ -16,12 +16,10 @@ h1{
 
 .navig{
     background-color: rgb(193, 230, 230);
-    width: 35%;
+    width: 40%;
     height:100vh;
-    padding:10px;
-    button{font-size: 18px;
-        width:100px;
-    }
+    padding:10px
+   
 }
 
 #newTask{
@@ -34,19 +32,40 @@ ul{
     list-style:none;
     padding:10px;
 }
-.menuContainer{
-   margin-top:10px;
-   margin-bottom:10px;
-    display:flex;
-    font-size: 18px;
-   width:100px;
 
-   
-} 
+ 
+#projectArray{
+    display:grid;
+    grid-template-columns: 3fr 1fr;
+  gap:10px;
+  margin: 10px;
+    
+}
 
+.projectBtn{
+    width:100px;
+}
 #newProjectTitle{
     font-size: 18px;
     width:150px;
     margin-bottom: 10px;
 
+}
+
+.main{
+
+    border:1px solid black;
+}
+
+.taskCard{
+    border:1px solid black;
+}
+
+form{
+    
+   display:flex;
+}
+
+#removeButton{
+border:none;
 }
