@@ -8,28 +8,21 @@ export function createTask (title, description, dueDate,priority){
   const toDo = createTask('finishTodoList', 'Project for TOP', 'none','high');
   
   export const main = document.querySelector('.main')
-  main.innerHTML=`<form id="addProject">
-       
-         <label for ='project-title'>Next task</label>
-        <input type="text" id="project-title" >
-        <label for ='description'>Description</label>
-        <input type="textarea" id="description">
-        <label for ='due-date'>Due date</label>
-        <input type='date' id="due-date">
-        <label for="priority">Priority</label>
-<select id="priority" name="priority">
-  <option value="high">High</option>
-  <option value="medium">Medium</option>
-  <option value="low">Low</option>
- 
-</select>
-</form>`
+  
 
 
-export const createTaskBtn = document.createElement('button');
-createTaskBtn.textContent='Add Task'
-main.appendChild(createTaskBtn);
+export const openDialogBtn= document.createElement('button');
+openDialogBtn.textContent='Add Task';
+main.appendChild(openDialogBtn);
 
+
+
+export function openDialog(){
+  const openDialog= document.getElementById("taskDialog");
+}
+
+
+export const addTaskBtn = document.getElementById('addTask');
 
  
 

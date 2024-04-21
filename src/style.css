@@ -44,6 +44,8 @@ ul{
 
 .projectBtn{
     width:100px;
+    
+
 }
 #newProjectTitle{
     font-size: 18px;
@@ -61,11 +63,20 @@ ul{
     border:1px solid black;
 }
 
-form{
-    
-   display:flex;
-}
-
 #removeButton{
 border:none;
+}
+
+
+dialog[open]{
+    width:300px;
+    display:flex;
+    flex-direction: column;
+    position:absolute;
+    top:40%;
+    left:40%;
+    form{
+        display:flex;
+        flex-direction: column;
+    }
 }

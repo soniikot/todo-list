@@ -1,11 +1,16 @@
 import './style.css';
 import { createProject, addProject, newProjectBtn } from './navigation';
-import { addTask, createTaskBtn} from './task';
+import { addTask, openDialog, addTaskBtn, openDialogBtn} from './task';
 
-createTaskBtn.addEventListener ('click', addTask )
+addTaskBtn.addEventListener ('click', addTask )
 
 
 
+    openDialogBtn.addEventListener("click", () => {
+      taskDialog.showModal();
+     
+    });
+    
 
 
 

@@ -1,4 +1,4 @@
-let projects=['house','work','health'];
+let projects=[ 'general','house','work','health'];
 
 const menuContainer = document.getElementById("projectArray")
 export function createProject(){
