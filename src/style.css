@@ -21,7 +21,9 @@ h1{
     padding:10px
    
 }
-
+.closeBox{
+    margin-left:280px;
+    }
 #newTask{
         position: absolute;
         top: 50%;

@@ -9,14 +9,19 @@ for(let i=0; i<projects.length; i++){
   button.textContent = projects[i];
   menuContainer.appendChild(button); 
   removeProject(button);
-
  
+
 };
 
-
-
-
 }
+
+/*export function highlightGeneral(button){
+button = style.color ='red';
+}*/
+
+
+
+
 
 export function addProject(){
   projects.push(newProjectTitle.value);
