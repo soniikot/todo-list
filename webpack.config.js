@@ -6,6 +6,9 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
    entry: {
      index: './src/index.js'
    },
+
+    watch: true,
+
   plugins: [
     new HtmlWebpackPlugin({
       title: 'ToDoList',

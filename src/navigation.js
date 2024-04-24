@@ -1,24 +1,30 @@
-let projects=[ 'general','house','work','health'];
+let projects=[ 'all tasks','house','work','health'];
 
 const menuContainer = document.getElementById("projectArray")
 export function createProject(){
 
+  let firstButton = true;
 for(let i=0; i<projects.length; i++){ 
- const button = document.createElement("button");
- button.classList.add('projectBtn'); 
-  button.textContent = projects[i];
-  menuContainer.appendChild(button); 
-  removeProject(button);
+ const projectButton = document.createElement("button");
+ projectButton.classList.add('projectBtn'); 
+ projectButton.textContent = projects[i];
+
+ if (firstButton) {
+  projectButton.classList.add('highlight'); // Add a class to highlight the first button
+  firstButton = false; // Update the variable to track the first button
+}
+ 
+  menuContainer.appendChild(projectButton); 
+  projectButton.addEventListener('click', ()=>{
+    alert('i am clicked');
+  });
+     
+  removeProject(projectButton);
  
 
 };
 
 }
-
-/*export function highlightGeneral(button){
-button = style.color ='red';
-}*/
-
 
 
 

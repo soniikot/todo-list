@@ -1,11 +1,12 @@
 import './style.css';
-import { createProject, addProject, newProjectBtn,highlightGeneral } from './navigation';
+import { createProject, addProject, newProjectBtn, chooseProject } from './navigation';
 import { addTask, openDialog, addTaskBtn, openDialogBtn} from './task';
 import { closeDialog } from './closeButton';
 
+
 closeDialog();
 addTaskBtn.addEventListener ('click', addTask )
-window.addEventListener('load',highlightGeneral);
+
 
 
     openDialogBtn.addEventListener("click", () => {
@@ -32,4 +33,5 @@ function stateHandle() {
 }
 newProjectBtn.addEventListener('click', addProject);
 
+//chooseProject();
 

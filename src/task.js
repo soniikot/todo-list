@@ -5,7 +5,7 @@ export function createTask (title, description, dueDate,priority){
     }
   }
   
-  const toDo = createTask('finishTodoList', 'Project for TOP', 'none','high');
+  
   
   export const main = document.querySelector('.main')
   
@@ -13,6 +13,7 @@ export function createTask (title, description, dueDate,priority){
 
 export const openDialogBtn= document.createElement('button');
 openDialogBtn.textContent='Add Task';
+openDialogBtn.classList.add('openDialogBtn')
 main.appendChild(openDialogBtn);
 
 
@@ -23,6 +24,7 @@ export function openDialog(){
 
 
 export const addTaskBtn = document.getElementById('addTask');
+
 
  
 
@@ -38,7 +40,18 @@ export const addTaskBtn = document.getElementById('addTask');
       taskCard.classList.add("taskCard");
       main.appendChild(taskCard);
       let task=createTask(title.value, description.value,dueDate.value,priority.value);
-      taskCard.textContent = `Title: ${task.title}, Description: ${task.description}, Due Date: ${task.dueDate}, Priority: ${task.priority}`;
+      taskCard.innerHTML=`<div class='taskCard'>
+      <div class='checkbox'><input type="checkbox" id="myCheckbox">
+    </div>
+      <div class='task'><div class='title'>${task.title}</div>
+      <div class='descriprion'>${task.description}</div>
+      <div class='dueDate'>${task.dueDate}</div>
+        <div class='priority'>
+          Priority: ${task.priority}
+        </div>
+        
+         </div>`
+          
 
   }
 
