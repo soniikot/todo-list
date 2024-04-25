@@ -45,4 +45,17 @@ function removeProject(button) {
   });
 }
 
-export const newProjectBtn = document.getElementById("newProjectBtn");
+const newProjectBtn = document.getElementById("newProjectBtn");
+
+const input = document.getElementById("newProjectTitle");
+newProjectBtn.disabled = true;
+input.addEventListener("change", stateHandle);
+
+function stateHandle() {
+  if (input.value === "") {
+    newProjectBtn.disabled = true; //button remains disabled
+  } else {
+    newProjectBtn.disabled = false; //button is enabled
+  }
+}
+newProjectBtn.addEventListener("click", addProject);

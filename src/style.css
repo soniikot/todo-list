@@ -73,36 +73,35 @@ border:none;
 }
 
 
-dialog[open]{
+dialog[open] {
     width:300px;
     display:flex;
     flex-direction: column;
     position:absolute;
     top:40%;
     left:40%;
-    form{
-        display:flex;
+    form {
+            display: flex;
         flex-direction: column;
     }
 }
 
-
-.openDialogBtn{
+.openDialogBtn {
  margin:5px;
     font-size:33px;
     background-color: rgb(198, 156, 237);
    border-radius: 5px;
 }
 
-.highlight{
+.highlight {
     background-color: red;
 }
 
-.title{
+.title {
     font-weight: bold;
   }
   
-  .taskCard{
+  .taskCard {
     display: flex;
     font-size: 20px;
     
