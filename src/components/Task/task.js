@@ -1,13 +1,16 @@
 export function createTask(title, description, dueDate, priority) {
-  // save to local storage
-
-  // no need to return
-  return {
+ const taskId = Date.now(); 
+ const task = {
+  id: taskId,
     title,
     description,
     dueDate,
     priority,
   };
+  let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+  tasks.push(task);
+  const taskString = JSON.stringify(task);
+  localStorage.setItem('tasks', JSON.stringify(tasks));
 }
 
 //
@@ -19,22 +22,18 @@ openDialogBtn.textContent = "Add Task";
 openDialogBtn.classList.add("openDialogBtn");
 main.appendChild(openDialogBtn);
 
-export function openDialog() {
-  // вообще не используется
-  const openDialog = document.getElementById("taskDialog");
-}
 
-export const addTaskBtn = document.getElementById("addTask");
+ const addTaskBtn = document.getElementById("addTask");
+  addTaskBtn.addEventListener("click", addTask);
 
-// таски нигде в localstorage не сохраняются?
 
 // modalAddTask
 export function addTask() {
-  let { value: titleValue } = document.getElementById("project-title"); // лучше сразу доставать value destructuring
-  let description = document.getElementById("description"); // сходу писать const чтобы по ошибке не перезаписать переменную
-  let dueDate = document.getElementById("due-date");
-  let priority = document.getElementById("priority");
-
+  const { value: titleValue } = document.getElementById("project-title"); // лучше сразу доставать value destructuring
+  const { value: descriptionValue } = document.getElementById("description"); 
+  const { value:dueDateValue} = document.getElementById("due-date");
+  const { value:priorityValue} = document.getElementById("priority");
+ 
   ////TODO
   /**
    *
@@ -48,24 +47,24 @@ export function addTask() {
 
   let task = createTask(
     titleValue,
-    description.value,
-    dueDate.value,
-    priority.value
+    descriptionValue,
+    dueDateValue,
+    priorityValue
   );
 
   taskCard.innerHTML = `<div class='taskCard'>
       <div class='checkbox'><input type="checkbox" id="myCheckbox">
     </div>
-      <div class='task'><div class='title'>${task.title}</div>
-      <div class='description'>${task.description}</div>
-      <div class='dueDate'>${task.dueDate}</div>
+      <div class='task'><div class='title'>${titleValue}</div>
+      <div class='description'>${descriptionValue}</div>
+      <div class='dueDate'>${dueDateValue}</div>
         <div class='priority'>
-          Priority: ${task.priority}
+          Priority: ${priorityValue}
         </div>
          </div>`;
 }
 
-addTaskBtn.addEventListener("click", addTask); // лучше повесить там же внутри  addTaskBtn а index.js использовать как центральная точка инициализации приложения. вся логика должна быть внутри своих компонентов.
+//addTaskBtn.addEventListener("click", addTask); // лучше повесить там же внутри  addTaskBtn а index.js использовать как центральная точка инициализации приложения. вся логика должна быть внутри своих компонентов.
 
 // const taskDialog = document..,.,
 
@@ -77,7 +76,8 @@ addTaskBtn.addEventListener("click", addTask); // лучше повесить т
 // }
 
 openDialogBtn.addEventListener("click", () => {
-  taskDialog.showModal();
+  const openDialog = document.getElementById("taskDialog");
+  openDialog.showModal();
 });
 
 //??? global variable
