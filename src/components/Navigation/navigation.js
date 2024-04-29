@@ -2,8 +2,6 @@ import "./style.css";
 import { setToLocalStorage } from "../../utils/utils";
 import { DEFAULT_PROJECTS } from "../constants/constants";
 
-// nano id/
-
 setToLocalStorage("currentProject", "all projects");
 const storedProjectsString = localStorage.getItem("projects");
 
@@ -13,17 +11,18 @@ if (!storedProjectsString) {
 
 const projects = JSON.parse(storedProjectsString);
 
-const projectButtonWrapper = document.getElementById("projectArray");
+const projectButtonWrapper = document.querySelector(".projectArray");
 //make sure that the first item from project can not be deleted
 //add project button from proect array
 
 export function createNavigation() {
+  createAllProjectBtn();
   for (let i = 0; i < projects.length; i++) {
     const project = projects[i];
 
     const projectButton = document.createElement("button");
 
-    projectButton.classList.add("projectBtn");
+    projectButton.classList.add("ProjectBtn");
 
     projectButton.id = project.id;
 
@@ -45,6 +44,15 @@ export function createNavigation() {
 
     addRemoveProjectButton(projectButton);
   }
+}
+function createAllProjectBtn() {
+  const projectButton = document.createElement("button");
+
+  projectButton.classList.add("allProjectBtn");
+
+  projectButton.textContent = "All projects";
+
+  projectButtonWrapper.appendChild(projectButton);
 }
 
 //add new project to projectArray

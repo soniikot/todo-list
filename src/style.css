@@ -13,13 +13,6 @@ h1 {
   flex-direction: row;
 }
 
-.navig {
-  background-color: rgb(193, 230, 230);
-  width: 40%;
-  height: 100vh;
-  padding: 10px;
-}
-
 .closeBox {
   margin-left: 280px;
 }
@@ -38,12 +31,6 @@ ul {
 /**
     * move to Navigation
     **/
-#projectArray {
-  display: grid;
-  grid-template-columns: 3fr 1fr;
-  gap: 10px;
-  margin: 10px;
-}
 
 .projectBtn {
   width: 100px;
