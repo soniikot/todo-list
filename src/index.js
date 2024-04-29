@@ -43,16 +43,22 @@ import {} from "./components/Task/task";
 
 function renderApp() {
   createNavigation();
-  retriveFromLocalStorage();
+  //retriveFromLocalStorage();
   // createTaskList()
 }
-function retriveFromLocalStorage() {
-  const myStringProjects = localStorage.getItem("projects");
-  const restoredProjects = JSON.stringify(myStringProjects);
-}
-window.addEventListener("load", renderApp);
 
-const projects = JSON.parse(localStorage.getItem("projects"));
+// const projects = JSON.parse(localStorage.getItem("projects"));
+
+// function retriveFromLocalStorage() {
+//   const myStringProjects = localStorage.getItem("projects");
+//   const restoredProjects = JSON.stringify(myStringProjects);
+//   return restoredProjects
+// }
+
+//<script defer
+//
+// renderApp()
+window.addEventListener("load", renderApp);
 
 /*
 setItem(): Adds key and value to localStorage

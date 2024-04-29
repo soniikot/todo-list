@@ -1,63 +1,108 @@
+import "./style.css";
+import { setToLocalStorage } from "../../utils/utils";
+import { DEFAULT_PROJECTS } from "../constants/constants";
+
+// nano id/
+
+setToLocalStorage("currentProject", "all projects");
 const storedProjectsString = localStorage.getItem("projects");
 
-// Parse the retrieved string into an array or use an empty array as default
-const projects = storedProjectsString ? JSON.parse(storedProjectsString) : [];
+if (!storedProjectsString) {
+  localStorage.setItem("projects", JSON.stringify(DEFAULT_PROJECTS));
+}
 
-const menuContainer = document.getElementById("projectArray");
-//add projectbutton from project array
+const projects = JSON.parse(storedProjectsString);
+
+const projectButtonWrapper = document.getElementById("projectArray");
+//make sure that the first item from project can not be deleted
+//add project button from proect array
+
 export function createNavigation() {
   for (let i = 0; i < projects.length; i++) {
+    const project = projects[i];
+
     const projectButton = document.createElement("button");
+
     projectButton.classList.add("projectBtn");
 
-    projectButton.textContent = projects[i];
-    menuContainer.appendChild(projectButton);
+    projectButton.id = project.id;
+
+    projectButton.textContent = project.name;
+
+    projectButtonWrapper.appendChild(projectButton);
+
     projectButton.addEventListener("click", () => {
       //showAllProjects();
+
+      // navigate to
+      //  .../project/id:
+      // window.location.assign('')
+
+      // window.location.pathname('/')
+
+      localStorage.setItem("currentProject", JSON.stringify(project.id));
     });
 
-    removeProject(projectButton);
+    addRemoveProjectButton(projectButton);
   }
 }
 
 //add new project to projectArray
 export function addProject() {
   projects.push(newProjectTitle.value);
+
   localStorage.setItem("projects", JSON.stringify(projects));
+
   const button = document.createElement("button");
+
   button.classList.add("projectBtn");
+
+  //
+
   button.textContent = newProjectTitle.value;
-  menuContainer.appendChild(button);
-  removeProject(button);
+
+  projectButtonWrapper.appendChild(button);
+
+  addRemoveProjectButton(button);
 }
+
 //remove project from project
-function removeProject(button) {
+function addRemoveProjectButton(projectButton) {
   const removeButton = document.createElement("button");
-  menuContainer.appendChild(removeButton);
+
+  projectButtonWrapper.appendChild(removeButton);
+
   removeButton.innerHTML = "x";
+
   removeButton.addEventListener("click", () => {
-    menuContainer.removeChild(button);
-    menuContainer.removeChild(removeButton);
+    projectButtonWrapper.removeChild(projectButton);
+    projectButtonWrapper.removeChild(removeButton);
 
-    // remove project from array?
+    const projectId = projectButton.id;
 
-    const projectName = button.textContent;
-    const index = projects.indexOf(projectName);
-    projects.splice(index, 1);
-    localStorage.setItem("projects", JSON.stringify(projects));
+    const filteredRemovedProjectList = projects.filter(
+      (project) => project.id !== projectId
+    );
+
+    //TODO
+    /**
+     * utils for setlocalstorage
+     **/
+    setToLocalStorage(projects, filteredRemovedProjectList);
   });
-}
-//enable or disable add new project Btn
-const newProjectBtn = document.getElementById("newProjectBtn");
-const input = document.getElementById("newProjectTitle");
-newProjectBtn.disabled = true;
-input.addEventListener("change", stateHandle);
 
-function stateHandle() {
-  if (input.value === "") {
-    newProjectBtn.disabled = true; //button remains disabled
-  } else {
-    newProjectBtn.disabled = false; //button is enabled
+  //enable or disable add new project Btn
+  const newProjectBtn = document.getElementById("newProjectBtn");
+  const input = document.getElementById("newProjectTitle");
+  newProjectBtn.disabled = true;
+  input.addEventListener("change", stateHandle);
+
+  function stateHandle() {
+    if (input.value === "") {
+      newProjectBtn.disabled = true; //button remains disabled
+    } else {
+      newProjectBtn.disabled = false; //button is enabled
+    }
   }
+  newProjectBtn.addEventListener("click", addProject);
 }
-newProjectBtn.addEventListener("click", addProject);
