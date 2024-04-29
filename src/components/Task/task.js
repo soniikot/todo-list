@@ -1,20 +1,20 @@
+//add task to local storage
 export function createTask(title, description, dueDate, priority) {
- const taskId = Date.now(); 
- const task = {
-  id: taskId,
+  const taskId = Date.now();
+  const task = {
+    id: taskId,
     title,
     description,
     dueDate,
     priority,
   };
-  let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+  let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
   tasks.push(task);
   const taskString = JSON.stringify(task);
-  localStorage.setItem('tasks', JSON.stringify(tasks));
+  localStorage.setItem("tasks", JSON.stringify(tasks));
 }
 
-//
-
+//open modal with task form
 export const main = document.querySelector(".main");
 
 export const openDialogBtn = document.createElement("button");
@@ -22,18 +22,16 @@ openDialogBtn.textContent = "Add Task";
 openDialogBtn.classList.add("openDialogBtn");
 main.appendChild(openDialogBtn);
 
-
- const addTaskBtn = document.getElementById("addTask");
-  addTaskBtn.addEventListener("click", addTask);
-
+const addTaskBtn = document.getElementById("addTask");
+addTaskBtn.addEventListener("click", addTask);
 
 // modalAddTask
 export function addTask() {
   const { value: titleValue } = document.getElementById("project-title"); // лучше сразу доставать value destructuring
-  const { value: descriptionValue } = document.getElementById("description"); 
-  const { value:dueDateValue} = document.getElementById("due-date");
-  const { value:priorityValue} = document.getElementById("priority");
- 
+  const { value: descriptionValue } = document.getElementById("description");
+  const { value: dueDateValue } = document.getElementById("due-date");
+  const { value: priorityValue } = document.getElementById("priority");
+
   ////TODO
   /**
    *
@@ -64,20 +62,18 @@ export function addTask() {
          </div>`;
 }
 
-//addTaskBtn.addEventListener("click", addTask); // лучше повесить там же внутри  addTaskBtn а index.js использовать как центральная точка инициализации приложения. вся логика должна быть внутри своих компонентов.
-
-// const taskDialog = document..,.,
-
-// export function closeDialog() {
-//   const closeButton = document.getElementById("closeButton");
-//   closeButton.addEventListener("click", function () {
-//     taskDialog.close();
-//   });
-// }
+//this function close the TaskModal
+export function closeModal() {
+  const closeButton = document.getElementById("closeButton");
+  const openDialog = document.getElementById("taskDialog");
+  closeButton.addEventListener("click", function () {
+    openDialog.close();
+  });
+}
+closeModal(); //not sure how to make eventlistener work without calling this funciton
 
 openDialogBtn.addEventListener("click", () => {
   const openDialog = document.getElementById("taskDialog");
   openDialog.showModal();
 });
-
-//??? global variable
+export function createTaskList() {}
