@@ -1,3 +1,5 @@
+import "./style.css";
+
 //add task to local storage
 export function createTask(title, description, dueDate, priority) {
   const taskId = Date.now();

@@ -16,3 +16,18 @@
   height: 100vh;
   padding: 10px;
 }
+
+ul {
+  list-style: none;
+  padding: 10px;
+}
+
+.projectBtn {
+  width: 100px;
+}
+
+#newProjectTitle {
+  font-size: 18px;
+  width: 150px;
+  margin-bottom: 10px;
+}
