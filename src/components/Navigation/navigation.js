@@ -1,4 +1,7 @@
-const projects = ["all project", "health", "work"];
+const storedProjectsString = localStorage.getItem("projects");
+
+// Parse the retrieved string into an array or use an empty array as default
+const projects = storedProjectsString ? JSON.parse(storedProjectsString) : [];
 
 const menuContainer = document.getElementById("projectArray");
 //add projectbutton from project array
