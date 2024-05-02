@@ -1,19 +1,24 @@
 import "./style.css";
+import { getFromLocalStorage, setToLocalStorage } from "../../utils/utils";
 
 //add task to local storage
 export function createTask(title, description, dueDate, priority) {
   const taskId = Date.now();
+  let taskProject = getFromLocalStorage("currentProject");
   const task = {
     id: taskId,
+    Project: taskProject,
     title,
     description,
     dueDate,
     priority,
   };
-  let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
+  let tasks = getFromLocalStorage("tasks") || [];
   tasks.push(task);
   const taskString = JSON.stringify(task);
   localStorage.setItem("tasks", JSON.stringify(tasks));
+
+  return task;
 }
 
 //open modal with task form
@@ -33,33 +38,28 @@ export function addTask() {
   const { value: descriptionValue } = document.getElementById("description");
   const { value: dueDateValue } = document.getElementById("due-date");
   const { value: priorityValue } = document.getElementById("priority");
-
-  ////TODO
-  /**
-   *
-   * move to separate function
-   *
-   **/
-
-  const taskCard = document.createElement("div");
-  taskCard.classList.add("taskCard");
-  main.appendChild(taskCard);
-
   let task = createTask(
     titleValue,
     descriptionValue,
     dueDateValue,
     priorityValue
   );
+  showTask(task);
+}
+
+function showTask(task) {
+  const taskCard = document.createElement("div");
+  taskCard.classList.add("taskCard");
+  main.appendChild(taskCard);
 
   taskCard.innerHTML = `<div class='taskCard'>
       <div class='checkbox'><input type="checkbox" id="myCheckbox">
     </div>
-      <div class='task'><div class='title'>${titleValue}</div>
-      <div class='description'>${descriptionValue}</div>
-      <div class='dueDate'>${dueDateValue}</div>
+      <div class='task'><div class='title'>${task.title}</div>
+      <div class='description'>${task.description}</div>
+      <div class='dueDate'>${task.dueDate}</div>
         <div class='priority'>
-          Priority: ${priorityValue}
+          Priority: ${task.priority}
         </div>
          </div>`;
 }
@@ -78,4 +78,23 @@ openDialogBtn.addEventListener("click", () => {
   const openDialog = document.getElementById("taskDialog");
   openDialog.showModal();
 });
-export function createTaskList() {}
+
+//populate select in task modal
+function populateSelect() {
+  const selectProject = document.getElementById("project");
+  const projects = getFromLocalStorage("projects");
+  projects.forEach((project) => {
+    const option = document.createElement("option");
+    option.value = project.id; // Use the 'id' property as the value
+    option.textContent = project.name; // Use the 'name' property as the text
+    selectProject.appendChild(option);
+  });
+}
+
+populateSelect();
+
+export function createTaskList() {
+  const tasks = getFromLocalStorage("tasks");
+  console.log(tasks);
+  tasks.forEach((task) => showTask(task));
+}

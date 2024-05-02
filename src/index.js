@@ -1,50 +1,11 @@
 import "./style.css";
 import { createNavigation } from "./components/Navigation/navigation";
 import {} from "./components/Task/task";
-
-//TODO
-/**
- * настроить formatter++
- * тест не отформатирован и не выровнен++
- *
- *
- * привести в порядок
- * folders++
- * function names & file names consistency!
- *
- *
- *
-  {
- projects: [{
- id: skdflj2342,
- name: 'house'
- }],
- *
- tasks: [
- {
- title,
- description,
- dueDate,
- priority
- project: id
- },]
- }
- *
- *
- * 
- * main deploy
- * 
- * development
- *  
- * "feature/localStorage" => PR development comments
- * 
- * 
- */
+import { createTaskList } from "./components/Task/task";
 
 function renderApp() {
   createNavigation();
-  //retriveFromLocalStorage();
-  // createTaskList()
+  createTaskList();
 }
 
 // const projects = JSON.parse(localStorage.getItem("projects"));
