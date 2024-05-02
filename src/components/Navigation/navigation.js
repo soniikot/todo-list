@@ -5,24 +5,14 @@ import { parse } from "date-fns";
 
 setToLocalStorage("currentProject", "all projects");
 
-<<<<<<< HEAD
 let projectsString = localStorage.getItem("projects");
 
 let projects = JSON.parse(projectsString);
-=======
-const projectsString = localStorage.getItem("projects");
-
-const projects = JSON.parse(projectsString) 
->>>>>>> 80ca3d3a88e89c1b6aa3533fa851c7242e3bf594
 
 if (!projectsString) {
   localStorage.setItem("projects", JSON.stringify(DEFAULT_PROJECTS));
 }
 console.log(projects.length);
-<<<<<<< HEAD
-=======
-
->>>>>>> 80ca3d3a88e89c1b6aa3533fa851c7242e3bf594
 
 const projectButtonWrapper = document.querySelector(".projectArray");
 
@@ -30,11 +20,7 @@ const projectButtonWrapper = document.querySelector(".projectArray");
 
 export function createNavigation() {
   createAllProjectBtn();
-<<<<<<< HEAD
 
-=======
-  
->>>>>>> 80ca3d3a88e89c1b6aa3533fa851c7242e3bf594
   for (let i = 0; i < projects.length; i++) {
     const project = projects[i];
 
@@ -75,7 +61,6 @@ function createAllProjectBtn() {
 
 //add new project to projectArray
 export function addProject() {
-<<<<<<< HEAD
   const newProject = {
     id: newProjectTitle.value,
     name: newProjectTitle.value,
@@ -84,39 +69,18 @@ export function addProject() {
   projects = JSON.parse(projectsString);
   projects.push(newProject);
   console.log(projects);
-=======
-  const newProject={
-    id:newProjectTitle.value,
-    name:newProjectTitle.value, 
-  }
-    projects.push(newProject);
-console.log(projects);
->>>>>>> 80ca3d3a88e89c1b6aa3533fa851c7242e3bf594
   localStorage.setItem("projects", JSON.stringify(projects));
-  
-  
- 
 
   const button = document.createElement("button");
 
   button.classList.add("projectBtn");
 
-<<<<<<< HEAD
-=======
-  
-
->>>>>>> 80ca3d3a88e89c1b6aa3533fa851c7242e3bf594
   button.textContent = newProjectTitle.value;
 
- projectButtonWrapper.appendChild(button);
+  projectButtonWrapper.appendChild(button);
 
   addRemoveProjectButton(button);
-<<<<<<< HEAD
 }
-=======
-
-};
->>>>>>> 80ca3d3a88e89c1b6aa3533fa851c7242e3bf594
 //remove project from project
 function addRemoveProjectButton(projectButton) {
   const removeButton = document.createElement("button");
@@ -135,19 +99,15 @@ function addRemoveProjectButton(projectButton) {
     const filteredRemovedProjectList = projects.filter(
       (project) => project.id !== projectId
     );
-console.log(filteredRemovedProjectList);
+
     //TODO
     /**
      * utils for setlocalstorage
      **/
-<<<<<<< HEAD
     localStorage.setItem(
       "projects",
       JSON.stringify(filteredRemovedProjectList)
     );
-=======
-    localStorage.setItem('projects', JSON.stringify(filteredRemovedProjectList));
->>>>>>> 80ca3d3a88e89c1b6aa3533fa851c7242e3bf594
   });
 
   //enable or disable add new project Btn
