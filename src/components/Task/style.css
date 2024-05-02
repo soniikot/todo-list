@@ -19,10 +19,12 @@ dialog[open] {
   position: absolute;
   top: 40%;
   left: 40%;
-  form {
-    display: flex;
-    flex-direction: column;
-  }
+}
+
+/* nesting! google  can I use */
+dialog[open] form {
+  display: flex;
+  flex-direction: column;
 }
 
 .openDialogBtn {
