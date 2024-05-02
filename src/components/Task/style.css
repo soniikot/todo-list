@@ -2,12 +2,6 @@
   margin-left: 280px;
 }
 
-#newTask {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-}
-
 .taskCard {
   font-size: 33px;
 }

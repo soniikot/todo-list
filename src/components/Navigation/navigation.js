@@ -26,7 +26,7 @@ const projectButtonWrapper = document.querySelector(".projectArray");
 
 export function createNavigation() {
   createAllProjectBtn();
-
+  addCurrentProjectTitle();
   for (let i = 0; i < projects.length; i++) {
     const project = projects[i];
 
@@ -41,15 +41,8 @@ export function createNavigation() {
     projectButtonWrapper.appendChild(projectButton);
 
     projectButton.addEventListener("click", () => {
-      //showAllProjects();
-
-      // navigate to
-      //  .../project/id:
-      // window.location.assign('')
-
-      // window.location.pathname('/')
-      addCurrentProjectTitle();
       localStorage.setItem("currentProject", JSON.stringify(project.id));
+      addCurrentProjectTitle();
     });
 
     addRemoveProjectButton(projectButton);
@@ -61,20 +54,17 @@ function addCurrentProjectTitle() {
   const main = document.querySelector(".main");
   const title = document.createElement("h1");
   title.textContent = "";
-  //use utils
-  title.textContent = localStorage.getItem("currentProject");
+
+  title.textContent = getFromLocalStorage("currentProject");
   title.id = "projectTitle";
 
   let h1Link;
 
   main.childNodes.forEach((elem) => {
-    //
     if (elem.id === "projectTitle") {
       h1Link = elem;
     }
   });
-
-  console.log(`Navigation/navigation.js - line: 87 ->> h1Link`, h1Link);
 
   h1Link && main.removeChild(h1Link);
 
@@ -89,6 +79,11 @@ function createAllProjectBtn() {
   projectButton.textContent = "All projects";
 
   projectButtonWrapper.appendChild(projectButton);
+
+  projectButton.addEventListener("click", () => {
+    setToLocalStorage("currentProject", " all projects");
+    addCurrentProjectTitle();
+  });
 }
 
 //add new project to projectArray
@@ -97,15 +92,6 @@ export function addProject() {
     id: newProjectInput.value,
     name: newProjectInput.value,
   };
-
-  // projectsString = localStorage.getItem("projects");[{}, {}]
-
-  // projects = JSON.parse(projectsString);
-
-  // projects.push(newProject);
-
-  // move to utils
-  //localStorage.setItem("projects", JSON.stringify(projects));
 
   const projects = getFromLocalStorage("projects");
 
@@ -121,11 +107,10 @@ export function addProject() {
 
   button.id = newProjectInput.value;
 
-  // projectButtonWrapper.firstChild.id = newProjectInput.value;
-
   projectButtonWrapper.appendChild(button);
 
   addRemoveProjectButton(button);
+  createNavigation();
 }
 
 //remove project from project
@@ -137,16 +122,11 @@ function addRemoveProjectButton(projectButton) {
   removeButton.innerHTML = "x";
 
   removeButton.addEventListener("click", () => {
-    // debugger;
-
     projectButtonWrapper.removeChild(projectButton);
 
     projectButtonWrapper.removeChild(removeButton);
 
     const projects = getFromLocalStorage("projects");
-
-    // projectsString = localStorage.getItem("projects");
-    // projects = JSON.parse(projectsString);
 
     const projectId = projectButton.id;
 
@@ -158,7 +138,6 @@ function addRemoveProjectButton(projectButton) {
   });
 
   //enable or disable add new project Btn
-
   newProjectBtn.disabled = true;
   newProjectInput.addEventListener("change", stateHandle);
 
