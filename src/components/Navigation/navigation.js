@@ -7,23 +7,17 @@ const newProjectInput = document.getElementById("newProjectTitle");
 
 setToLocalStorage("currentProject", "all projects");
 
-//TODO
-/**
- * const
- **/
 const projectsString = localStorage.getItem("projects");
 
 const projects = JSON.parse(projectsString);
 
 if (!projectsString) {
-  localStorage.setItem("projects", JSON.stringify(DEFAULT_PROJECTS));
+  setToLocalStorage("projects", DEFAULT_PROJECTS);
 }
-console.log(projects.length);
 
 const projectButtonWrapper = document.querySelector(".projectArray");
 
-//add project button from project array
-
+//create projects button from project array
 export function createNavigation() {
   createAllProjectBtn();
   addCurrentProjectTitle();
@@ -99,18 +93,24 @@ export function addProject() {
 
   setToLocalStorage("projects", projects);
 
-  const button = document.createElement("button");
+  const newProjectbutton = document.createElement("button");
 
-  button.classList.add("projectBtn");
+  newProjectbutton.classList.add("projectBtn");
 
-  button.textContent = newProjectInput.value;
+  newProjectbutton.textContent = newProjectInput.value;
 
-  button.id = newProjectInput.value;
+  newProjectbutton.id = newProjectInput.value;
 
   projectButtonWrapper.appendChild(button);
+  projectButton.addEventListener("click", () => {
+    localStorage.setItem(
+      "currentProject",
+      JSON.stringify(newProjectInput.value)
+    );
+    addCurrentProjectTitle();
+  });
 
   addRemoveProjectButton(button);
-  createNavigation();
 }
 
 //remove project from project
