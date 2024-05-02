@@ -1,7 +1,6 @@
 import "./style.css";
 import { setToLocalStorage } from "../../utils/utils";
 import { DEFAULT_PROJECTS } from "../constants/constants";
-import { parse } from "date-fns";
 
 setToLocalStorage("currentProject", "all projects");
 
@@ -45,10 +44,19 @@ export function createNavigation() {
 
       localStorage.setItem("currentProject", JSON.stringify(project.id));
     });
-
+    addCurrentProjectTitle();
     addRemoveProjectButton(projectButton);
   }
 }
+
+//project title
+function addCurrentProjectTitle() {
+  const main = document.querySelector(".main");
+  const title = document.createElement(h1);
+  title.textContent = "hello";
+  main.appendChild(title);
+}
+
 function createAllProjectBtn() {
   const projectButton = document.createElement("button");
 
@@ -66,9 +74,11 @@ export function addProject() {
     name: newProjectTitle.value,
   };
   projectsString = localStorage.getItem("projects");
+
   projects = JSON.parse(projectsString);
+
   projects.push(newProject);
-  console.log(projects);
+
   localStorage.setItem("projects", JSON.stringify(projects));
 
   const button = document.createElement("button");
@@ -91,23 +101,19 @@ function addRemoveProjectButton(projectButton) {
 
   removeButton.addEventListener("click", () => {
     projectButtonWrapper.removeChild(projectButton);
+
     projectButtonWrapper.removeChild(removeButton);
+
     projectsString = localStorage.getItem("projects");
     projects = JSON.parse(projectsString);
+
     const projectId = projectButton.id;
-    console.log(projectId);
+
     const filteredRemovedProjectList = projects.filter(
       (project) => project.id !== projectId
     );
 
-    //TODO
-    /**
-     * utils for setlocalstorage
-     **/
-    localStorage.setItem(
-      "projects",
-      JSON.stringify(filteredRemovedProjectList)
-    );
+    setToLocalStorage("projects", filteredRemovedProjectList);
   });
 
   //enable or disable add new project Btn
@@ -118,9 +124,9 @@ function addRemoveProjectButton(projectButton) {
 
   function stateHandle() {
     if (input.value === "") {
-      newProjectBtn.disabled = true; //button remains disabled
+      newProjectBtn.disabled = true;
     } else {
-      newProjectBtn.disabled = false; //button is enabled
+      newProjectBtn.disabled = false;
     }
   }
   newProjectBtn.addEventListener("click", addProject);
