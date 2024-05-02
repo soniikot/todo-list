@@ -1,22 +1,26 @@
 import "./style.css";
 import { setToLocalStorage } from "../../utils/utils";
 import { DEFAULT_PROJECTS } from "../constants/constants";
+import { parse } from "date-fns";
 
 setToLocalStorage("currentProject", "all projects");
-const storedProjectsString = localStorage.getItem("projects");
 
-if (!storedProjectsString) {
+let projectsString = localStorage.getItem("projects");
+
+let projects = JSON.parse(projectsString);
+
+if (!projectsString) {
   localStorage.setItem("projects", JSON.stringify(DEFAULT_PROJECTS));
 }
-
-const projects = JSON.parse(storedProjectsString);
+console.log(projects.length);
 
 const projectButtonWrapper = document.querySelector(".projectArray");
-//make sure that the first item from project can not be deleted
-//add project button from proect array
+
+//add project button from project array
 
 export function createNavigation() {
   createAllProjectBtn();
+
   for (let i = 0; i < projects.length; i++) {
     const project = projects[i];
 
@@ -57,15 +61,19 @@ function createAllProjectBtn() {
 
 //add new project to projectArray
 export function addProject() {
-  projects.push(newProjectTitle.value);
-
+  const newProject = {
+    id: newProjectTitle.value,
+    name: newProjectTitle.value,
+  };
+  projectsString = localStorage.getItem("projects");
+  projects = JSON.parse(projectsString);
+  projects.push(newProject);
+  console.log(projects);
   localStorage.setItem("projects", JSON.stringify(projects));
 
   const button = document.createElement("button");
 
   button.classList.add("projectBtn");
-
-  //
 
   button.textContent = newProjectTitle.value;
 
@@ -73,7 +81,6 @@ export function addProject() {
 
   addRemoveProjectButton(button);
 }
-
 //remove project from project
 function addRemoveProjectButton(projectButton) {
   const removeButton = document.createElement("button");
@@ -85,9 +92,10 @@ function addRemoveProjectButton(projectButton) {
   removeButton.addEventListener("click", () => {
     projectButtonWrapper.removeChild(projectButton);
     projectButtonWrapper.removeChild(removeButton);
-
+    projectsString = localStorage.getItem("projects");
+    projects = JSON.parse(projectsString);
     const projectId = projectButton.id;
-
+    console.log(projectId);
     const filteredRemovedProjectList = projects.filter(
       (project) => project.id !== projectId
     );
@@ -96,7 +104,10 @@ function addRemoveProjectButton(projectButton) {
     /**
      * utils for setlocalstorage
      **/
-    setToLocalStorage(projects, filteredRemovedProjectList);
+    localStorage.setItem(
+      "projects",
+      JSON.stringify(filteredRemovedProjectList)
+    );
   });
 
   //enable or disable add new project Btn
