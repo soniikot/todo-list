@@ -62,7 +62,7 @@ function addCurrentProjectTitle() {
 
   h1Link && main.removeChild(h1Link);
 
-  main.appendChild(title);
+  main.insertBefore(title, main.firstChild);
 }
 
 function createAllProjectBtn() {
