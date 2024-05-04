@@ -35,15 +35,17 @@ addTaskBtn.addEventListener("click", addTask);
 
 // modalAddTask
 export function addTask() {
-  const { value: titleValue } = document.getElementById("project-title"); // лучше сразу доставать value destructuring
+  const { value: titleValue } = document.getElementById("project-title");
   const { value: descriptionValue } = document.getElementById("description");
   const { value: dueDateValue } = document.getElementById("due-date");
   const { value: priorityValue } = document.getElementById("priority");
+  const { value: projectValue } = document.getElementById("project");
   let task = createTask(
     titleValue,
     descriptionValue,
     dueDateValue,
-    priorityValue
+    priorityValue,
+    projectValue
   );
   showTask(task);
 }
@@ -95,7 +97,10 @@ function populateSelect() {
 populateSelect();
 
 export function createTaskList() {
+  while (taskBox.firstChild) {
+    taskBox.removeChild(taskBox.firstChild);
+  }
   const tasks = getFromLocalStorage("tasks");
-  console.log(tasks);
+
   tasks.forEach((task) => showTask(task));
 }

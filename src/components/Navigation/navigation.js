@@ -1,7 +1,7 @@
 import "./style.css";
 import { setToLocalStorage, getFromLocalStorage } from "../../utils/utils";
 import { DEFAULT_PROJECTS } from "../constants/constants";
-import { showTask, taskBox } from "../Task/task";
+import { showTask, taskBox, createTaskList } from "../Task/task";
 const newProjectBtn = document.getElementById("newProjectBtn");
 const newProjectInput = document.getElementById("newProjectTitle");
 
@@ -65,6 +65,7 @@ function addCurrentProjectTitle() {
 
   main.insertBefore(title, main.firstChild);
 }
+
 function showCurrentProjectTasks() {
   const tasks = getFromLocalStorage("tasks");
   const currentProject = getFromLocalStorage("currentProject");
@@ -72,7 +73,7 @@ function showCurrentProjectTasks() {
     taskBox.removeChild(taskBox.firstChild);
   }
   const filteredTasks = tasks.filter((task) => task.project == currentProject);
-  //add task card container and clean the tasks
+
   filteredTasks.forEach((task) => showTask(task));
 }
 function createAllProjectBtn() {
@@ -87,6 +88,7 @@ function createAllProjectBtn() {
   projectButton.addEventListener("click", () => {
     setToLocalStorage("currentProject", " all projects");
     addCurrentProjectTitle();
+    createTaskList();
   });
 }
 
