@@ -7,7 +7,7 @@ export function createTask(title, description, dueDate, priority) {
   let taskProject = getFromLocalStorage("currentProject");
   const task = {
     id: taskId,
-    Project: taskProject,
+    project: taskProject,
     title,
     description,
     dueDate,
@@ -23,6 +23,7 @@ export function createTask(title, description, dueDate, priority) {
 
 //open modal with task form
 export const main = document.querySelector(".main");
+export const taskBox = document.querySelector(".taskbox");
 
 export const openDialogBtn = document.createElement("button");
 openDialogBtn.textContent = "Add Task";
@@ -47,10 +48,10 @@ export function addTask() {
   showTask(task);
 }
 
-function showTask(task) {
+export function showTask(task) {
   const taskCard = document.createElement("div");
   taskCard.classList.add("taskCard");
-  main.appendChild(taskCard);
+  taskBox.appendChild(taskCard);
 
   taskCard.innerHTML = `<div class='taskCard'>
       <div class='checkbox'><input type="checkbox" id="myCheckbox">

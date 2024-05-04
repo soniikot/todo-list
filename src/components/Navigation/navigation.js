@@ -1,7 +1,7 @@
 import "./style.css";
 import { setToLocalStorage, getFromLocalStorage } from "../../utils/utils";
 import { DEFAULT_PROJECTS } from "../constants/constants";
-
+import { showTask, taskBox } from "../Task/task";
 const newProjectBtn = document.getElementById("newProjectBtn");
 const newProjectInput = document.getElementById("newProjectTitle");
 
@@ -26,7 +26,7 @@ export function createNavigation() {
 
     const projectButton = document.createElement("button");
 
-    projectButton.classList.add("ProjectBtn");
+    projectButton.classList.add("projectBtn");
 
     projectButton.id = project.id;
 
@@ -37,6 +37,7 @@ export function createNavigation() {
     projectButton.addEventListener("click", () => {
       localStorage.setItem("currentProject", JSON.stringify(project.id));
       addCurrentProjectTitle();
+      showCurrentProjectTasks();
     });
 
     addRemoveProjectButton(projectButton);
@@ -64,7 +65,16 @@ function addCurrentProjectTitle() {
 
   main.insertBefore(title, main.firstChild);
 }
-
+function showCurrentProjectTasks() {
+  const tasks = getFromLocalStorage("tasks");
+  const currentProject = getFromLocalStorage("currentProject");
+  while (taskBox.firstChild) {
+    taskBox.removeChild(taskBox.firstChild);
+  }
+  const filteredTasks = tasks.filter((task) => task.project == currentProject);
+  //add task card container and clean the tasks
+  filteredTasks.forEach((task) => showTask(task));
+}
 function createAllProjectBtn() {
   const projectButton = document.createElement("button");
 
@@ -101,8 +111,8 @@ export function addProject() {
 
   newProjectbutton.id = newProjectInput.value;
 
-  projectButtonWrapper.appendChild(button);
-  projectButton.addEventListener("click", () => {
+  projectButtonWrapper.appendChild(newProjectbutton);
+  newProjectbutton.addEventListener("click", () => {
     localStorage.setItem(
       "currentProject",
       JSON.stringify(newProjectInput.value)
@@ -110,7 +120,7 @@ export function addProject() {
     addCurrentProjectTitle();
   });
 
-  addRemoveProjectButton(button);
+  addRemoveProjectButton(newProjectbutton);
 }
 
 //remove project from project
