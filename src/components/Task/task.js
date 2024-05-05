@@ -4,7 +4,8 @@ import { getFromLocalStorage, setToLocalStorage } from "../../utils/utils";
 //add task to local storage
 export function createTask(title, description, dueDate, priority) {
   const taskId = Date.now();
-  let taskProject = getFromLocalStorage("currentProject");
+  const taskProject = getFromLocalStorage("currentProject");
+  //let status
   const task = {
     id: taskId,
     project: taskProject,
@@ -33,13 +34,13 @@ main.appendChild(openDialogBtn);
 const addTaskBtn = document.getElementById("addTask");
 addTaskBtn.addEventListener("click", addTask);
 
-// modalAddTask
 export function addTask() {
   const { value: titleValue } = document.getElementById("project-title");
   const { value: descriptionValue } = document.getElementById("description");
   const { value: dueDateValue } = document.getElementById("due-date");
   const { value: priorityValue } = document.getElementById("priority");
   const { value: projectValue } = document.getElementById("project");
+
   let task = createTask(
     titleValue,
     descriptionValue,
@@ -56,7 +57,7 @@ export function showTask(task) {
   taskBox.appendChild(taskCard);
 
   taskCard.innerHTML = `<div class='taskCard'>
-      <div class='checkbox'><input type="checkbox" id="myCheckbox">
+      <div class='checkbox'><input type="checkbox" id="status">
     </div>
       <div class='task'><div class='title'>${task.title}</div>
       <div class='description'>${task.description}</div>
@@ -64,7 +65,22 @@ export function showTask(task) {
         <div class='priority'>
           Priority: ${task.priority}
         </div>
+        <button class='deleteTaskBtn' id='deleteTask'>x</button>
          </div>`;
+
+  taskCard.querySelector(".deleteTaskBtn").addEventListener("click", () => {
+    taskBox.removeChild(taskCard);
+
+    const tasks = getFromLocalStorage("tasks");
+    console.log(tasks);
+    const taskId = task.title;
+    console.log(taskId);
+    const filteredRemovedTaskList = tasks.filter(
+      (task) => task.title !== taskId
+    );
+    console.log(filteredRemovedTaskList);
+    setToLocalStorage("tasks", filteredRemovedTaskList);
+  });
 }
 
 //this function close the TaskModal

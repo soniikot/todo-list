@@ -13,6 +13,7 @@
 .navig {
   background-color: rgb(193, 230, 230);
   width: 40%;
+  max-width: 250px;
   height: 100vh;
   padding: 10px;
 }
