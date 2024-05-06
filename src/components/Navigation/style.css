@@ -1,5 +1,4 @@
 .allProjectBtn {
-  background-color: rgb(166, 166, 198);
   grid-column: 1 / span 2;
 }
 
@@ -29,4 +28,8 @@
 
 .navig input {
   width: 200px;
+}
+
+.active {
+  background-color: red;
 }

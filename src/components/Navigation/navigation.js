@@ -1,7 +1,12 @@
 import "./style.css";
 import { setToLocalStorage, getFromLocalStorage } from "../../utils/utils";
 import { DEFAULT_PROJECTS } from "../constants/constants";
-import { showTask, taskBox, createTaskList } from "../Task/task";
+import {
+  showTask,
+  taskBox,
+  createTaskList,
+  updateChoosenProjectInModal,
+} from "../Task/task";
 const newProjectBtn = document.getElementById("newProjectBtn");
 const newProjectInput = document.getElementById("newProjectTitle");
 
@@ -25,13 +30,9 @@ export function createNavigation() {
     const project = projects[i];
 
     const projectButton = document.createElement("button");
-
     projectButton.classList.add("projectBtn");
-
     projectButton.id = project.id;
-
     projectButton.textContent = project.name;
-
     projectButtonWrapper.appendChild(projectButton);
 
     projectButton.addEventListener("click", () => {
@@ -39,13 +40,28 @@ export function createNavigation() {
       addCurrentProjectTitle();
       showCurrentProjectTasks();
     });
-
+    highlightCurrentProject();
     addRemoveProjectButton(projectButton);
   }
 }
 
+function highlightCurrentProject() {
+  const projectButtons = document.querySelectorAll(
+    ".projectBtn, .allProjectBtn"
+  );
+
+  projectButtons.forEach((button) => {
+    button.addEventListener("click", () => {
+      projectButtons.forEach((btn) => btn.classList.remove("active"));
+
+      button.classList.add("active");
+    });
+  });
+}
+
 //project title
 function addCurrentProjectTitle() {
+  updateChoosenProjectInModal();
   const main = document.querySelector(".main");
   const title = document.createElement("h1");
   title.textContent = "";
@@ -80,6 +96,7 @@ function createAllProjectBtn() {
   const projectButton = document.createElement("button");
 
   projectButton.classList.add("allProjectBtn");
+  projectButton.classList.add("active");
 
   projectButton.textContent = "All projects";
 

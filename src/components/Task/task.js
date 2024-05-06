@@ -23,6 +23,7 @@ export function createTask(title, description, dueDate, priority) {
 }
 
 //open modal with task form
+
 export const main = document.querySelector(".main");
 export const taskBox = document.querySelector(".taskbox");
 
@@ -39,7 +40,7 @@ export function addTask() {
   const { value: descriptionValue } = document.getElementById("description");
   const { value: dueDateValue } = document.getElementById("due-date");
   const { value: priorityValue } = document.getElementById("priority");
-  const { value: projectValue } = document.getElementById("project");
+  const { value: projectValue } = getFromLocalStorage("currentProject");
 
   let task = createTask(
     titleValue,
@@ -97,20 +98,25 @@ openDialogBtn.addEventListener("click", () => {
   const openDialog = document.getElementById("taskDialog");
   openDialog.showModal();
 });
+export function updateChoosenProjectInModal() {
+  const projectP = document.querySelector("#projectP");
 
+  projectP.textContent = getFromLocalStorage("currentProject");
+}
+updateChoosenProjectInModal();
 //populate select in task modal
-function populateSelect() {
+/*function populateSelect() {
   const selectProject = document.getElementById("project");
   const projects = getFromLocalStorage("projects");
   projects.forEach((project) => {
     const option = document.createElement("option");
-    option.value = project.id; // Use the 'id' property as the value
-    option.textContent = project.name; // Use the 'name' property as the text
+    option.value = project.id; 
+    option.textContent = project.name; 
     selectProject.appendChild(option);
   });
-}
+}*/
 
-populateSelect();
+//populateSelect();
 
 export function createTaskList() {
   while (taskBox.firstChild) {
