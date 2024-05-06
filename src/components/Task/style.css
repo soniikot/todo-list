@@ -1,5 +1,5 @@
 .closeBox {
-  margin-left: 280px;
+  margin-left: 220px;
 }
 
 .taskCard {
@@ -9,12 +9,13 @@
 }
 
 dialog[open] {
-  width: 300px;
+  width: 240px;
   display: flex;
   flex-direction: column;
   position: absolute;
   top: 40%;
   left: 40%;
+  font-size: 15px;
 }
 
 /* nesting! google  can I use */
@@ -24,8 +25,21 @@ dialog[open] form {
   flex-direction: column;
 }
 
+dialog[open] input,
+select {
+  padding: 0;
+  border: 1px solid black;
+  width: 200px;
+  box-sizing: border-box;
+}
+form button {
+  width: 100px;
+  margin: auto;
+  margin-top: 10px;
+}
+
 .openDialogBtn {
-  margin: 5px;
+  margin: 10px;
   font-size: 33px;
   background-color: rgb(198, 156, 237);
   border-radius: 5px;
@@ -37,7 +51,6 @@ dialog[open] form {
 
 .taskCard {
   display: flex;
-
   font-size: 20px;
 }
 .task {

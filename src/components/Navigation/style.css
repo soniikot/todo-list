@@ -18,11 +18,15 @@
   padding: 10px;
 }
 
-ul {
-  list-style: none;
-  padding: 10px;
-}
-
 .projectBtn {
   width: 100px;
+}
+
+.newProjectBtn {
+  margin-top: 10px;
+  margin-left: 10px;
+}
+
+.navig input {
+  width: 200px;
 }
