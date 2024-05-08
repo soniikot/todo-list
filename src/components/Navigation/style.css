@@ -10,7 +10,7 @@
 }
 
 .navig {
-  background-color: rgb(193, 230, 230);
+  background-color: rgb(212, 163, 115);
   width: 40%;
   max-width: 250px;
   height: 100vh;
@@ -27,9 +27,10 @@
 }
 
 .navig input {
-  width: 200px;
+  width: 210px;
+  margin-left: 10px;
 }
 
 .active {
-  background-color: red;
+  background-color: rgb(204, 213, 174);
 }
