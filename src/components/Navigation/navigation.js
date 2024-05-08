@@ -7,13 +7,13 @@ import {
   createTaskList,
   updateChoosenProjectInModal,
 } from "../Task/task";
+
 const newProjectBtn = document.getElementById("newProjectBtn");
 const newProjectInput = document.getElementById("newProjectTitle");
 
 setToLocalStorage("currentProject", "all projects");
 
 const projectsString = localStorage.getItem("projects");
-
 const projects = JSON.parse(projectsString);
 
 if (!projectsString) {
@@ -24,12 +24,13 @@ const projectButtonWrapper = document.querySelector(".projectArray");
 
 //create projects button from project array
 export function createNavigation() {
-  createAllProjectBtn();
+  createAllProjectBtn(); // ./components/allProjectsBtn/createAllProjectBtn
   addCurrentProjectTitle();
+
   for (let i = 0; i < projects.length; i++) {
     const project = projects[i];
 
-    const projectButton = document.createElement("button");
+    const projectButton = document.createElement("button"); // ./components/projectButton + x
     projectButton.classList.add("projectBtn");
     projectButton.id = project.id;
     projectButton.textContent = project.name;
@@ -40,6 +41,7 @@ export function createNavigation() {
       addCurrentProjectTitle();
       showCurrentProjectTasks();
     });
+
     highlightCurrentProject();
     addRemoveProjectButton(projectButton);
   }
@@ -59,7 +61,6 @@ function highlightCurrentProject() {
   });
 }
 
-//project title
 function addCurrentProjectTitle() {
   updateChoosenProjectInModal();
   const main = document.querySelector(".main");
@@ -85,13 +86,16 @@ function addCurrentProjectTitle() {
 function showCurrentProjectTasks() {
   const tasks = getFromLocalStorage("tasks");
   const currentProject = getFromLocalStorage("currentProject");
+
   while (taskBox.firstChild) {
     taskBox.removeChild(taskBox.firstChild);
   }
+
   const filteredTasks = tasks.filter((task) => task.project == currentProject);
 
   filteredTasks.forEach((task) => showTask(task));
 }
+
 function createAllProjectBtn() {
   const projectButton = document.createElement("button");
 
@@ -131,6 +135,7 @@ export function addProject() {
   newProjectbutton.id = newProjectInput.value;
 
   projectButtonWrapper.appendChild(newProjectbutton);
+
   newProjectbutton.addEventListener("click", () => {
     localStorage.setItem(
       "currentProject",
@@ -168,9 +173,9 @@ function addRemoveProjectButton(projectButton) {
 
   //enable or disable add new project Btn
   newProjectBtn.disabled = true;
-  newProjectInput.addEventListener("change", stateHandle);
+  newProjectInput.addEventListener("change", activateNewProjectBtn);
 
-  function stateHandle() {
+  function activateNewProjectBtn() {
     if (newProjectInput.value === "") {
       newProjectBtn.disabled = true;
     } else {

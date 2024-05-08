@@ -1,11 +1,10 @@
 import "./style.css";
 import { getFromLocalStorage, setToLocalStorage } from "../../utils/utils";
 
-//add task to local storage
 export function createTask(title, description, dueDate, priority) {
   const taskId = Date.now();
   const taskProject = getFromLocalStorage("currentProject");
-  //let status
+  let status = false;
   const task = {
     id: taskId,
     project: taskProject,
@@ -13,6 +12,7 @@ export function createTask(title, description, dueDate, priority) {
     description,
     dueDate,
     priority,
+    status,
   };
   let tasks = getFromLocalStorage("tasks") || [];
   tasks.push(task);
@@ -41,13 +41,15 @@ export function addTask() {
   const { value: dueDateValue } = document.getElementById("due-date");
   const { value: priorityValue } = document.getElementById("priority");
   const { value: projectValue } = getFromLocalStorage("currentProject");
+  const { value: statusValue } = "not done";
 
   let task = createTask(
     titleValue,
     descriptionValue,
     dueDateValue,
     priorityValue,
-    projectValue
+    projectValue,
+    statusValue
   );
   showTask(task);
 }
@@ -58,7 +60,7 @@ export function showTask(task) {
   taskBox.appendChild(taskCard);
 
   taskCard.innerHTML = `<div class='taskCard'>
-      <div class='checkbox'><input type="checkbox" id="status">
+      <div class='checkboxWrapper'><input type='checkbox' id='${task.id}'">
     </div>
       <div class='task'><div class='title'>${task.title}</div>
       <div class='description'>${task.description}</div>
@@ -69,18 +71,33 @@ export function showTask(task) {
         <button class='deleteTaskBtn' id='deleteTask'>x</button>
          </div>`;
 
-  taskCard.querySelector(".deleteTaskBtn").addEventListener("click", () => {
-    taskBox.removeChild(taskCard);
+  const checkbox = taskCard.querySelector(
+    ".checkboxWrapper input[type='checkbox'"
+  );
+  const tasks = getFromLocalStorage("tasks");
 
-    const tasks = getFromLocalStorage("tasks");
+  const taskId = task.id;
+
+  checkbox.addEventListener("change", () => {
+    const currentTask = tasks.find((task) => task.id == taskId);
+    if (currentTask.status == false) {
+      currentTask.status = true;
+    } else {
+      currentTask.status == false;
+    }
     console.log(tasks);
-    const taskId = task.title;
-    console.log(taskId);
-    const filteredRemovedTaskList = tasks.filter(
-      (task) => task.title !== taskId
+    const index = tasks.findIndex((task) => task.id === currentTask.id);
+    tasks[index] = currentTask;
+    console.log(tasks);
+    setToLocalStorage("tasks", tasks);
+  });
+
+  taskCard.querySelector(".deleteTaskBtn").addEventListener("click", () => {
+    const filteredRemovedProjectList = tasks.filter(
+      (task) => task.id !== taskId
     );
-    console.log(filteredRemovedTaskList);
-    setToLocalStorage("tasks", filteredRemovedTaskList);
+    setToLocalStorage("tasks", filteredRemovedProjectList);
+    taskBox.removeChild(taskCard);
   });
 }
 
@@ -104,19 +121,6 @@ export function updateChoosenProjectInModal() {
   projectP.textContent = getFromLocalStorage("currentProject");
 }
 updateChoosenProjectInModal();
-//populate select in task modal
-/*function populateSelect() {
-  const selectProject = document.getElementById("project");
-  const projects = getFromLocalStorage("projects");
-  projects.forEach((project) => {
-    const option = document.createElement("option");
-    option.value = project.id; 
-    option.textContent = project.name; 
-    selectProject.appendChild(option);
-  });
-}*/
-
-//populateSelect();
 
 export function createTaskList() {
   while (taskBox.firstChild) {
