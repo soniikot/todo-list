@@ -1,0 +1,36 @@
+.allProjectBtn {
+  grid-column: 1 / span 2;
+}
+
+.projectArray {
+  display: grid;
+  grid-template-columns: 3fr 1fr;
+  gap: 10px;
+  margin: 10px;
+}
+
+.navig {
+  background-color: rgb(212, 163, 115);
+  width: 40%;
+  max-width: 250px;
+  height: 100vh;
+  padding: 10px;
+}
+
+.projectBtn {
+  width: 100px;
+}
+
+.newProjectBtn {
+  margin-top: 10px;
+  margin-left: 10px;
+}
+
+.navig input {
+  width: 210px;
+  margin-left: 10px;
+}
+
+.active {
+  background-color: rgb(204, 213, 174);
+}

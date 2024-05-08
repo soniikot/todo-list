@@ -1,0 +1,90 @@
+.closeBox {
+  margin-left: 190px;
+}
+
+.taskCard {
+  font-size: 33px;
+  border: 1px solid black;
+  width: 100%;
+}
+
+dialog[open] {
+  width: 240px;
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 40%;
+  left: 40%;
+  font-size: 15px;
+}
+
+/* nesting! google  can I use */
+/*Global	81.44%	+	5.49%	=	86.93%*/
+dialog[open] form {
+  display: flex;
+  flex-direction: column;
+}
+
+dialog[open] input,
+select {
+  padding: 0;
+  border: 1px solid black;
+  width: 200px;
+  box-sizing: border-box;
+}
+form button {
+  width: 100px;
+  margin: auto;
+  margin-top: 10px;
+}
+
+.openDialogBtn {
+  margin: 10px;
+  font-size: 33px;
+  border-radius: 5px;
+}
+
+.title {
+  font-weight: bold;
+}
+
+.taskCard {
+  display: flex;
+  font-size: 20px;
+}
+.task {
+  display: flex;
+  align-self: center;
+  align-items: stretch;
+  padding: 20px;
+  gap: 5px;
+  width: 100%;
+}
+.checkboxWrapper {
+  margin: 10px;
+  display: flex;
+  align-self: center;
+}
+
+.deleteTaskBtn {
+  color: brown;
+  font-weight: 900;
+  font-size: 17px;
+  /* align-self: flex-end; */
+  /* justify-self: center; */
+}
+
+.main {
+  width: 100%;
+}
+
+.projectForm {
+  display: flex;
+}
+
+.priorityWrapper {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0 0 0 auto;
+}

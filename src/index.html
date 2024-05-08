@@ -1,51 +1,50 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>To do list</title>
-</head>
-<body>
+  </head>
+  <body>
+    <!-- видимо по условию задачи все приложение должно строиться из JS -->
     <h1>My tasks</h1>
     <div class="wrapper">
-        <div class="navig">
-            <h2>Projects:</h2>
-            <div id="projectArray"></div>
-          
-        <input type="text" id="newProjectTitle" >
-            <button id="newProjectBtn">Add new project</button></div>
-      
-    
-
-        <div class="main">
-           
-        
- 
-
-<dialog id="taskDialog">
-    <div class="closeBox">
-    <button id="closeButton">&times;</button></div>
-    <form id="addProject"  method="dialog">
-    
-        <label for ='project-title'>Next task*</label>
-       <input type="text" id="project-title" required>
-       <label for ='description'>Description</label>
-       <input type="textarea" id="description">
-       <label for ='due-date'>Due date</label>
-       <input type='date' id="due-date">
-       <label for="priority">Priority</label>
-<select id="priority" name="priority">
- <option value="high">High</option>
- <option value="medium">Medium</option>
- <option value="low">Low</option>
-
-</select>
-<button id='addTask'>Add Task</button></form>`
-</dialog>
-   
- 
-
+      <div class="navig">
+        <h2>Projects:</h2>
+        <div class="projectArray"></div>
+        <input type="text" id="newProjectTitle" />
+        <button id="newProjectBtn" class="newProjectBtn">
+          Add new project
+        </button>
+      </div>
+      <div class="main">
+        <dialog id="taskDialog">
+          <div class="closeBox">
+            <button id="closeButton">&times;</button>
+          </div>
+          <form id="addProject" method="dialog">
+            <label for="project-title">Next task*</label>
+            <input type="text" id="project-title" required />
+            <label for="description">Description</label>
+            <input type="textarea" id="description" />
+            <label for="due-date">Due date</label>
+            <input type="date" id="due-date" />
+            <label for="priority">Priority</label>
+            <select id="priority" name="priority">
+              <option value="high">High</option>
+              <option value="medium">Medium</option>
+              <option value="low">Low</option>
+            </select>
+            <div class="projectForm">
+              <label for="project-title">Project: </label>
+              <p id="projectP"></p>
+            </div>
+            <!--<select id="project" name="project"></select>-->
+            <button id="addTask">Add Task</button>
+          </form>
+        </dialog>
+        <div class="taskbox"></div>
       </div>
     </div>
-</body>
+  </body>
 </html>
