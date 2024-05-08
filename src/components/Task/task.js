@@ -4,7 +4,7 @@ import { getFromLocalStorage, setToLocalStorage } from "../../utils/utils";
 export function createTask(title, description, dueDate, priority) {
   const taskId = Date.now();
   const taskProject = getFromLocalStorage("currentProject");
-  let status = false;
+  let status = "";
   const task = {
     id: taskId,
     project: taskProject,
@@ -60,7 +60,9 @@ export function showTask(task) {
   taskBox.appendChild(taskCard);
 
   taskCard.innerHTML = `<div class='taskCard'>
-      <div class='checkboxWrapper'><input type='checkbox' id='${task.id}'">
+      <div class='checkboxWrapper'><input type='checkbox'${
+        task.status ? "checked" : ""
+      } id='${task.id}'">
     </div>
       <div class='task'><div class='title'>${task.title}</div>
       <div class='description'>${task.description}</div>
@@ -80,15 +82,14 @@ export function showTask(task) {
 
   checkbox.addEventListener("change", () => {
     const currentTask = tasks.find((task) => task.id == taskId);
-    if (currentTask.status == false) {
-      currentTask.status = true;
-    } else {
-      currentTask.status == false;
+    if (currentTask.status == "") {
+      currentTask.status = "checked";
+    } else if (currentTask.status == "checked") {
+      currentTask.status = "";
     }
-    console.log(tasks);
+
     const index = tasks.findIndex((task) => task.id === currentTask.id);
     tasks[index] = currentTask;
-    console.log(tasks);
     setToLocalStorage("tasks", tasks);
   });
 
