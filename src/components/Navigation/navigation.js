@@ -19,10 +19,10 @@ const projects = JSON.parse(projectsString);
 if (!projectsString) {
   setToLocalStorage("projects", DEFAULT_PROJECTS);
 }
-
+//when i export create all project btn do
+//I need to export or create again projectButtonWrapper?
 const projectButtonWrapper = document.querySelector(".projectArray");
 
-//create projects button from project array
 export function createNavigation() {
   createAllProjectBtn(); // ./components/allProjectsBtn/createAllProjectBtn
   addCurrentProjectTitle();
@@ -31,6 +31,8 @@ export function createNavigation() {
     const project = projects[i];
 
     const projectButton = document.createElement("button"); // ./components/projectButton + x
+    //?I tried put I am not sure if it makes sense because
+    // there is another function connected from this module, so I need to import it back and forth"?
     projectButton.classList.add("projectBtn");
     projectButton.id = project.id;
     projectButton.textContent = project.name;
@@ -113,7 +115,6 @@ function createAllProjectBtn() {
   });
 }
 
-//add new project to projectArray
 export function addProject() {
   const newProject = {
     id: newProjectInput.value,
@@ -147,7 +148,6 @@ export function addProject() {
   addRemoveProjectButton(newProjectbutton);
 }
 
-//remove project from project
 function addRemoveProjectButton(projectButton) {
   const removeButton = document.createElement("button");
 
@@ -171,7 +171,6 @@ function addRemoveProjectButton(projectButton) {
     setToLocalStorage("projects", filteredRemovedProjectList);
   });
 
-  //enable or disable add new project Btn
   newProjectBtn.disabled = true;
   newProjectInput.addEventListener("change", activateNewProjectBtn);
 

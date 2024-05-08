@@ -41,7 +41,7 @@ export function addTask() {
   const { value: dueDateValue } = document.getElementById("due-date");
   const { value: priorityValue } = document.getElementById("priority");
   const { value: projectValue } = getFromLocalStorage("currentProject");
-  const { value: statusValue } = "not done";
+  const { value: status } = "";
 
   let task = createTask(
     titleValue,
@@ -50,11 +50,13 @@ export function addTask() {
     priorityValue,
     projectValue,
     statusValue
+    //not sure how status works here
   );
   showTask(task);
 }
 
 export function showTask(task) {
+  const { id, project, title, description, dueDate, priority, status } = task;
   const taskCard = document.createElement("div");
   taskCard.classList.add("taskCard");
   taskBox.appendChild(taskCard);
@@ -62,16 +64,18 @@ export function showTask(task) {
   taskCard.innerHTML = `<div class='taskCard'>
       <div class='checkboxWrapper'><input type='checkbox'${
         task.status ? "checked" : ""
-      } id='${task.id}'">
+      } id='${id}'">
     </div>
-      <div class='task'><div class='title'>${task.title}</div>
-      <div class='description'>${task.description}</div>
-      <div class='dueDate'>${task.dueDate}</div>
+      <div class='task'><div class='title'>${title}</div>
+      <div class='description'>${description}</div>
+      <div class='priorityWrapper'>
+      <div class='dueDate'>${dueDate}</div>
         <div class='priority'>
-          Priority: ${task.priority}
+          Priority: ${priority}
         </div>
         <button class='deleteTaskBtn' id='deleteTask'>x</button>
-         </div>`;
+        </div>
+        </div>`;
 
   const checkbox = taskCard.querySelector(
     ".checkboxWrapper input[type='checkbox'"
@@ -79,7 +83,9 @@ export function showTask(task) {
   const tasks = getFromLocalStorage("tasks");
 
   const taskId = task.id;
-
+  //function updateCheckBoxStatus(){}
+  //i could make it into separate function, but then i need to
+  //reach taskcard one more time. what would be better?
   checkbox.addEventListener("change", () => {
     const currentTask = tasks.find((task) => task.id == taskId);
     if (currentTask.status == "") {
