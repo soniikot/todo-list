@@ -2,8 +2,18 @@ import "./style.css";
 import { createNavigation } from "./components/Navigation/navigation";
 import {} from "./components/Task/task";
 import { createTaskList } from "./components/Task/task";
+import { setToLocalStorage } from "./utils/utils";
+import { DEFAULT_PROJECTS } from "./components/constants/constants";
 
 function renderApp() {
+  setToLocalStorage("currentProject", "all projects");
+
+  const projectsString = localStorage.getItem("projects");
+
+  if (!projectsString) {
+    setToLocalStorage("projects", DEFAULT_PROJECTS);
+  }
+
   createNavigation();
   createTaskList();
 }

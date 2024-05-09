@@ -1,69 +1,21 @@
 import "./style.css";
 import { setToLocalStorage, getFromLocalStorage } from "../../utils/utils";
-import { DEFAULT_PROJECTS } from "../constants/constants";
-import {
-  showTask,
-  taskBox,
-  createTaskList,
-  updateChoosenProjectInModal,
-} from "../Task/task";
+import { showTask, taskBox, updateChoosenProjectInModal } from "../Task/task";
+import { createAllProjectBtn } from "./components/createAllProjectBtn";
+import { createSingleProjectBtn } from "./components/createSingleProjectBtn";
 
 const newProjectBtn = document.getElementById("newProjectBtn");
 const newProjectInput = document.getElementById("newProjectTitle");
 
-setToLocalStorage("currentProject", "all projects");
-
-const projectsString = localStorage.getItem("projects");
-const projects = JSON.parse(projectsString);
-
-if (!projectsString) {
-  setToLocalStorage("projects", DEFAULT_PROJECTS);
-}
-//when i export create all project btn do
-//I need to export or create again projectButtonWrapper?
 const projectButtonWrapper = document.querySelector(".projectArray");
 
 export function createNavigation() {
-  createAllProjectBtn(); // ./components/allProjectsBtn/createAllProjectBtn
+  createAllProjectBtn();
   addCurrentProjectTitle();
-
-  for (let i = 0; i < projects.length; i++) {
-    const project = projects[i];
-
-    const projectButton = document.createElement("button"); // ./components/projectButton + x
-    //?I tried put I am not sure if it makes sense because
-    // there is another function connected from this module, so I need to import it back and forth"?
-    projectButton.classList.add("projectBtn");
-    projectButton.id = project.id;
-    projectButton.textContent = project.name;
-    projectButtonWrapper.appendChild(projectButton);
-
-    projectButton.addEventListener("click", () => {
-      localStorage.setItem("currentProject", JSON.stringify(project.id));
-      addCurrentProjectTitle();
-      showCurrentProjectTasks();
-    });
-
-    highlightCurrentProject();
-    addRemoveProjectButton(projectButton);
-  }
+  createSingleProjectBtn();
 }
 
-function highlightCurrentProject() {
-  const projectButtons = document.querySelectorAll(
-    ".projectBtn, .allProjectBtn"
-  );
-
-  projectButtons.forEach((button) => {
-    button.addEventListener("click", () => {
-      projectButtons.forEach((btn) => btn.classList.remove("active"));
-
-      button.classList.add("active");
-    });
-  });
-}
-
-function addCurrentProjectTitle() {
+export function addCurrentProjectTitle() {
   updateChoosenProjectInModal();
   const main = document.querySelector(".main");
   const title = document.createElement("h1");
@@ -85,7 +37,7 @@ function addCurrentProjectTitle() {
   main.insertBefore(title, main.firstChild);
 }
 
-function showCurrentProjectTasks() {
+export function showCurrentProjectTasks() {
   const tasks = getFromLocalStorage("tasks");
   const currentProject = getFromLocalStorage("currentProject");
 
@@ -96,23 +48,6 @@ function showCurrentProjectTasks() {
   const filteredTasks = tasks.filter((task) => task.project == currentProject);
 
   filteredTasks.forEach((task) => showTask(task));
-}
-
-function createAllProjectBtn() {
-  const projectButton = document.createElement("button");
-
-  projectButton.classList.add("allProjectBtn");
-  projectButton.classList.add("active");
-
-  projectButton.textContent = "All projects";
-
-  projectButtonWrapper.appendChild(projectButton);
-
-  projectButton.addEventListener("click", () => {
-    setToLocalStorage("currentProject", " all projects");
-    addCurrentProjectTitle();
-    createTaskList();
-  });
 }
 
 export function addProject() {
@@ -148,7 +83,7 @@ export function addProject() {
   addRemoveProjectButton(newProjectbutton);
 }
 
-function addRemoveProjectButton(projectButton) {
+export function addRemoveProjectButton(projectButton) {
   const removeButton = document.createElement("button");
 
   projectButtonWrapper.appendChild(removeButton);
@@ -184,3 +119,31 @@ function addRemoveProjectButton(projectButton) {
 
   newProjectBtn.addEventListener("click", addProject);
 }
+
+// observer pattern
+//
+
+// class
+// MobX
+
+// export var functionName = () => {
+//   return {}
+// }
+
+// export function functionName2() {
+//   return {}
+// }
+
+// hoisting
+// var, fn declarations, class
+
+// export function newFunction(string){
+//   console.log(string);
+// }
+// newFunction('123')
+
+// export const newFunction1 = (string) =>{
+//   console.log(string)
+// }
+
+// newFunction1('hello')

@@ -14,6 +14,7 @@ export function createTask(title, description, dueDate, priority) {
     priority,
     status,
   };
+
   let tasks = getFromLocalStorage("tasks") || [];
   tasks.push(task);
   const taskString = JSON.stringify(task);
@@ -80,6 +81,7 @@ export function showTask(task) {
   const checkbox = taskCard.querySelector(
     ".checkboxWrapper input[type='checkbox'"
   );
+
   const tasks = getFromLocalStorage("tasks");
 
   const taskId = task.id;

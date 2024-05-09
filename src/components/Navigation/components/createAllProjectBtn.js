@@ -1,3 +1,7 @@
+import { setToLocalStorage } from "../../../utils/utils";
+import { addCurrentProjectTitle } from "../navigation";
+import { createTaskList } from "../../Task/task";
+
 export function createAllProjectBtn() {
   const projectButtonWrapper = document.querySelector(".projectArray");
   const projectButton = document.createElement("button");
